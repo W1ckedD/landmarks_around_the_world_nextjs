@@ -1,16 +1,13 @@
-import { Location } from '../../../server';
+import { PrismaClient } from "@prisma/client";
+
+const client = new PrismaClient();
 
 export default async function (req, res) {
   try {
-    if (req.method === 'GET') {
-      const locations = await Location.findAll({});
-      return res.status(200).json({ locations });
-    } else if (req.method === 'POST') {
-      console.log(request.body);
-      return res.status(200).json({ mgs: 'success' });
-    }
+    const data = await client.location.findMany({});
+    res.status(200).json({ data });
   } catch (err) {
     console.log(err);
-    return res.status(500).json(err.message);
+    res.status(500).json({ error: "Something went wrong" });
   }
 }
