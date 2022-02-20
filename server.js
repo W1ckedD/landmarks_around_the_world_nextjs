@@ -43,6 +43,10 @@ exports.Location = sequelize.define('location', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  imgUrl: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   createdAt: {
     type: DataTypes.DATE,
     defaultValue: Date.now,
@@ -51,7 +55,7 @@ exports.Location = sequelize.define('location', {
 
 app.prepare().then(() => {
   sequelize
-    .sync()
+    .sync({ force: false })
     .then((db) => {
       console.log(`Connected to database: ${db.getDatabaseName()}`);
     })
