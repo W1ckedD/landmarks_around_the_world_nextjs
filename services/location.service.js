@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const API_URL = process.env.API_URL;
+
 class LocationService {
   static async fetchLocations() {
     try {
-      return await axios.get('http://localhost:3000/api/locations/');
+      return await axios.get(`${API_URL}/api/locations/`);
     } catch (err) {
       console.log(err);
     }
@@ -11,7 +13,7 @@ class LocationService {
 
   static async fetchLocationById(id) {
     try {
-      return await axios.get(`http://localhost:3000/api/locations/${id}`);
+      return await axios.get(`${API_URL}/api/locations/${id}`);
     } catch (err) {
       console.log(err);
     }
@@ -19,7 +21,7 @@ class LocationService {
 
   static async addLocation({ title, description, country, city, imgUrl }) {
     try {
-      return await axios.post('/api/locations/', {
+      return await axios.post(`${API_URL}/api/locations/`, {
         title,
         description,
         country,
@@ -36,7 +38,7 @@ class LocationService {
     { title, description, country, city, imgUrl }
   ) {
     try {
-      return await axios.put(`/api/locations/${id}/`, {
+      return await axios.put(`${API_URL}/api/locations/${id}/`, {
         title,
         description,
         country,
@@ -50,7 +52,7 @@ class LocationService {
 
   static async deleteLocation(id) {
     try {
-      return await axios.delete(`/api/locations/${id}/`);
+      return await axios.delete(`${API_URL}/api/locations/${id}/`);
     } catch (err) {
       console.log(err);
     }
