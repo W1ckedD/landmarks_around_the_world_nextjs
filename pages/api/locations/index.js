@@ -1,13 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
-const client = new PrismaClient();
+const prisma = new PrismaClient();
 
 export default async function (req, res) {
-  try {
-    const data = await client.location.findMany({});
-    res.status(200).json({ data });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Something went wrong" });
+  if (req.method === 'GET') {
+    try {
+      const data = await prisma.location.findMany({});
+      res.status(200).json({ data });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  } else if (req.method === 'POST') {
+    try {
+      const data = await prisma.location.create({ data: req.body });
+      res.status(201).json({ msg: 'Success' });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
   }
 }

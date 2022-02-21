@@ -1,20 +1,23 @@
 import styles from '../styles/Home.module.css';
 
+import Head from 'next/head';
+
 export default function Home() {
   return (
     <div>
+      <Head>
+        <title>Landmarks Around the World</title>
+      </Head>
       <main className={styles.main}>
-        <img className='img-fluid' src='/icon-512x512.png'/>
+        <img className="img-fluid" src="/icon-512x512.png" />
         <h1 className={styles.title}>Landmarks Around the World</h1>
-        <h2 className={styles.description}>Famous landmarks and tourist attractions around the world</h2>
+        <h2 className={styles.description}>
+          Famous landmarks and tourist attractions around the world
+        </h2>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="/" target="_blank" rel="noopener noreferrer">
           Powered by{' '}
           <span className={styles.logo}>
             <img src="/icon-192x192.png" alt="Logo" width={32} height={32} />

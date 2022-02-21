@@ -2,18 +2,30 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+// React
 import { useState } from 'react';
 
-import LocationService from '../../services/location.service';
+// Services
+import LocationService from '../../../services/location.service';
 
-export default function AddLocationPage() {
+export async function getServerSideProps({ params }) {
+  const { locationId } = params;
+  const { data } = await LocationService.fetchLocationById(locationId);
+  return {
+    props: {
+      location: data.location,
+    },
+  };
+}
+
+export default function EditLocationPage({ location }) {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    country: '',
-    city: '',
-    imgUrl: '',
+    title: location.title,
+    description: location.description,
+    country: location.country,
+    city: location.city,
+    imgUrl: location.imgUrl,
   });
 
   const handleChange = (event) => {
@@ -25,7 +37,7 @@ export default function AddLocationPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = await LocationService.addLocation(formData);
+    const data = await LocationService.updateLocation(location.id, formData);
     if (data) {
       router.push('/locations');
     }
@@ -33,7 +45,7 @@ export default function AddLocationPage() {
   return (
     <>
       <Head>
-        <title>Add Landmark</title>
+        <title>{location.title}</title>
       </Head>
       <div className="row">
         <div className="col-lg-3"></div>
@@ -41,7 +53,7 @@ export default function AddLocationPage() {
           onSubmit={handleSubmit}
           className="mt-3 p-4 shadow rounded col-lg-6 col-md-12 col-sm-12"
         >
-          <h4 className="text-center">Add a Landmark</h4>
+          <h4 className="text-center">Update {location.title}</h4>
           <div className="form-group mb-4">
             <label htmlFor="title">Title</label>
             <input
@@ -94,7 +106,7 @@ export default function AddLocationPage() {
             />
           </div>
           <button type="submit" className="btn btn-primary w-100">
-            Add Location
+            Save
           </button>
         </form>
         <div className="col-lg-3"></div>

@@ -1,0 +1,32 @@
+.card {
+  box-shadow: 0 0 10px #ccc;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.cardTitle {
+  margin: 1rem 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cardSubtitle {
+  font-family: 'Roboto', sans-serif;
+  color: #555;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.cardActions {
+  justify-content: space-between;
+}
