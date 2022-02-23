@@ -4,7 +4,7 @@ const withPWA = require('next-pwa');
 const nextConfig = withPWA({
   reactStrictMode: true,
   env: {
-    API_URL: 'http://support.bpmexpert.ir/',
+    API_URL: 'http://localhost:3000/',
   },
   pwa: {
     dest: 'public',
